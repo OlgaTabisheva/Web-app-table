@@ -9,7 +9,7 @@ function ComponentTable({tableMap}) {
 
   const [tableColumnNames, setTableColumnNames] = useState([])
   const [viewArray, setViewArray] = useState([])
-  const [viewOptions, setViewOptions] = useState({page: 1, field: 'name', sort: 'asc'})
+  const [viewOptions, setViewOptions] = useState({page: 1, field: '', sort: 'asc'})
   const [isFetched, setIsFetched] = useState(false)
 
   let lastPage = Math.ceil(tableMap?.length / 15)
@@ -23,18 +23,15 @@ function ComponentTable({tableMap}) {
   }
 
   function sliceView(sorted) {
-    if (viewOptions?.page >= 2) {
       let number = viewOptions?.page;
       setViewArray(sorted.slice((number - 1) * 15, ((number - 1) * 15) + 15))
-    } else
-      setViewArray(sorted.slice(0, 15))
   }
 
   useEffect(() => {
     setIsFetched(true)
     setTableColumnNames([])
     setViewArray([])
-    setViewOptions({page: 1, field: 'name', sort: 'asc'})
+    setViewOptions({page: 1, field: '', sort: 'asc'})
   }, [tableMap])
 
   useEffect(() => {
