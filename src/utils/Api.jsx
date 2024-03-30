@@ -7,7 +7,7 @@ export const fetchLocation = async () => {
   return data;
 }
 
-export const fetchCharacter= async () => {
+export const fetchCharacter = async () => {
   const {data} = await axios.get(`${baseUrl}/api/character`, {withCredentials: false,});
   return data;
 }

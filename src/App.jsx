@@ -9,7 +9,7 @@ function App() {
 
   const [changeApi, setChangeApi] = useState([])
   const [optionsActive, setOptionsActive] = useState('')
-  const [isLoaded,setIsLoaded]  =useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
   const options = [
     "Location",
     "Character"
@@ -20,11 +20,12 @@ function App() {
 
   useEffect(() => {
     if (optionsActive === "Character") {
+      setIsLoaded(true)
       fetchCharacter().then(res => {
+
         setChangeApi(res?.results)
-        setIsLoaded(true)
       }).catch((e) => {
-        console.log(e)
+          console.log(e)
         }
       ).finally(() => {
         setIsLoaded(false)
@@ -32,10 +33,10 @@ function App() {
       });
     }
     if (optionsActive === "Location") {
+      setIsLoaded(true)
       fetchLocation().then(res => {
         setChangeApi(res?.results)
-        setIsLoaded(true)
-      }).catch((e) => console.log(e)).finally(()=>
+      }).catch((e) => console.log(e)).finally(() =>
         setIsLoaded(false))
 
     }
@@ -53,7 +54,7 @@ function App() {
           );
         })}
       </select>
-      <ComponentTable tableMap={changeApi} />
+      <ComponentTable tableMap={changeApi}/>
       {isLoaded && <Spinner/>}
     </div>
   )

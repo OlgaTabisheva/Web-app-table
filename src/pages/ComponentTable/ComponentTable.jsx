@@ -10,7 +10,7 @@ function ComponentTable({tableMap}) {
   const [tableColumnNames, setTableColumnNames] = useState([])
   const [viewArray, setViewArray] = useState([])
   const [viewOptions, setViewOptions] = useState({page: 1, field: 'name', sort: 'asc'})
-  const [isFetched,setIsFetched] = useState(false)
+  const [isFetched, setIsFetched] = useState(false)
 
   let lastPage = Math.ceil(tableMap?.length / 15)
 
@@ -30,11 +30,12 @@ function ComponentTable({tableMap}) {
       setViewArray(sorted.slice(0, 15))
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     setIsFetched(true)
     setTableColumnNames([])
-    console.log(isFetched,'isFetched')
-  },[tableMap])
+    setViewArray([])
+    setViewOptions({page: 1, field: 'name', sort: 'asc'})
+  }, [tableMap])
 
   useEffect(() => {
     if (isFetched === false) {
@@ -43,14 +44,12 @@ function ComponentTable({tableMap}) {
     if (tableMap?.length > 0 && isFetched === true) {
       for (const key of Object.keys(tableMap[0])) {
         let tmp = tableColumnNames;
-        console.log(tmp)
         tmp.push(key)
-        console.log(tmp)
         setTableColumnNames(tmp)
       }
     }
     setIsFetched(false)
-  }, [tableMap,viewArray])
+  }, [tableMap, viewArray])
 
   useEffect(() => {
     let tmp = tableMap
@@ -66,56 +65,56 @@ function ComponentTable({tableMap}) {
 
   return (
     <div className={styles.box}>
-    <table className={styles.componentTable}>
-      <thead className={styles.componentTable__head}>
-      <tr className={styles.componentTable__trTitle}>
-        {tableColumnNames.map((obj, index) =>
-          <th key={index*999} className={styles.componentTable__th}>{obj}
-            <div className={styles.componentTable__boxArrow}>
-              <button className={styles.componentTable__arrowButton} onClick={() => setViewOptions({
-                page: viewOptions?.page,
-                field: obj,
-                sort: 'dec'
-              })}><ArrowUp className={styles.componentTable__arrowUp}/></button>
-              <button className={styles.componentTable__arrowButton} onClick={() => setViewOptions({
-                page: viewOptions?.page,
-                field: obj,
-                sort: 'asc'
-              })}><ArrowDown className={styles.componentTable__arrowDown}/></button>
-            </div>
-          </th>)
+      <table className={styles.componentTable}>
+        <thead className={styles.componentTable__head}>
+        <tr className={styles.componentTable__trTitle}>
+          {tableColumnNames.map((obj, index) =>
+            <th key={index * 999} className={styles.componentTable__th}>{obj}
+              <div className={styles.componentTable__boxArrow}>
+                <button className={styles.componentTable__arrowButton} onClick={() => setViewOptions({
+                  page: viewOptions?.page,
+                  field: obj,
+                  sort: 'dec'
+                })}><ArrowUp className={styles.componentTable__arrowUp}/></button>
+                <button className={styles.componentTable__arrowButton} onClick={() => setViewOptions({
+                  page: viewOptions?.page,
+                  field: obj,
+                  sort: 'asc'
+                })}><ArrowDown className={styles.componentTable__arrowDown}/></button>
+              </div>
+            </th>)
+          }
+        </tr>
+        </thead>
+        <tbody className={styles.componentTable__tbody}>
+        {viewArray?.map((obj, j) =>
+          <tr key={obj?.id} className={styles.componentTable__tr}>
+            {tableColumnNames?.map((columnName, i) =>
+              <td key={i * 1000 + j} className={styles.componentTable__td}>{JSON.stringify(obj[columnName])}</td>
+            )}
+          </tr>)
         }
-      </tr>
-      </thead>
-      <tbody className={styles.componentTable__tbody}>
-      {viewArray?.map((obj,j) =>
-        <tr key={obj?.id} className={styles.componentTable__tr}>
-          {tableColumnNames?.map((columnName, i) =>
-            <td  key={i*1000+j} className={styles.componentTable__td}>{JSON.stringify(obj[columnName])}</td>
-          )}
-        </tr>)
-      }
-      </tbody>
-      <tfoot >
-      <tr className={styles.componentTable__tfoot}>
-        <td>Rows per page 15</td>
-        <td className={styles.componentTable__pagination}>
-          <ButtonIcon value={'left'} onClick={() => setViewOptions({
-            page: viewOptions?.page - 1,
-            field: viewOptions?.field,
-            sort: viewOptions?.sort
-          })} disabled={viewOptions?.page < lastPage}/>
-          <p
-            className={styles.componentTable__paginationText}>{viewOptions?.page}/{lastPage}</p>
-          <ButtonIcon value={'right'} onClick={() => setViewOptions({
-            page: viewOptions?.page + 1,
-            field: viewOptions?.field,
-            sort: viewOptions?.sort
-          })} disabled={viewOptions?.page >= lastPage}/>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
+        </tbody>
+        <tfoot>
+        <tr className={styles.componentTable__tfoot}>
+          <td>Rows per page 15</td>
+          <td className={styles.componentTable__pagination}>
+            <ButtonIcon value={'left'} onClick={() => setViewOptions({
+              page: viewOptions?.page - 1,
+              field: viewOptions?.field,
+              sort: viewOptions?.sort
+            })} disabled={viewOptions?.page < lastPage}/>
+            <p
+              className={styles.componentTable__paginationText}>{viewOptions?.page}/{lastPage}</p>
+            <ButtonIcon value={'right'} onClick={() => setViewOptions({
+              page: viewOptions?.page + 1,
+              field: viewOptions?.field,
+              sort: viewOptions?.sort
+            })} disabled={viewOptions?.page >= lastPage}/>
+          </td>
+        </tr>
+        </tfoot>
+      </table>
     </div>
   )
 }
