@@ -1,0 +1,32 @@
+@import "../../variables";
+
+.buttonIcon{
+  box-shadow: $shadowButtonIcon;
+  width: 24px;
+  height: 20px;
+  padding: 2px 4px 2px 4px;
+  gap: 8px;
+  border-radius: 6px;
+  opacity: 0px;
+  border: none;
+  background-color: $white;
+  cursor: pointer;
+
+  &__right,&__left {
+  stroke: black;
+
+
+}
+  &:disabled {
+    box-shadow: 0px 0px 0px 1px #464F603D;
+    border: none;
+    background-color: $fill;
+
+    .buttonIcon__right,.buttonIcon__left {
+      stroke: $light-grey;
+    }
+  }
+  &:hover{
+    opacity: 0.5;
+  }
+}

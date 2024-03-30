@@ -1,0 +1,45 @@
+$stock-font: "Inter", sans-serif;
+
+$white:#FFFFFF;
+$fill:#F4F7FC;
+$light-grey:#868FA0;
+$grey:#A1A9B8;
+$dark-grey:#464F60;
+
+$shadowTable:0px 0px 2px 0px #00000014, 0px 1px 4px 0px #454B571F,0px 0px 0px 1px #98A1B21A;
+$shadowInput: 0px 0px 0px 1px #68718229,0px 1px 2px 0px #0000000F;
+$shadowInputFocus: 0px 0px 0px 4px #01B2ED5C, 0px 0px 0px 1px #68718229, 0px 1px 2px 0px #0000000F;
+$shadowInputHover:0px 0px 0px 1px #6871825C, 0px 1px 4px 0px #00000014;
+$shadowButtonIcon: 0px 2px 5px 0px #5960781A, 0px 0px 0px 1px #464F6029, 0px 1px 1px 0px #0000001A;
+
+
+%textBody-b2 {
+  //styleName: Body/b2;
+  font-family: $stock-font;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+
+}
+%textOverline{
+  //styleName: overline;
+  font-family: $stock-font;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0.04em;
+  text-align: left;
+
+}
+%textSubtitle{
+  //styleName: Subtitle/s2;
+  font-family: $stock-font;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: 0.02em;
+  text-align: left;
+
+}
+
